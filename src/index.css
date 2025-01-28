@@ -1,0 +1,88 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.with-margin-left {
+  margin-left: 2rem;
+}
+
+.brand {
+  color: #f4511e;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+
+.pic {
+  padding: 0;
+}
+
+.nav-item-link {
+  display: inline-block;
+  text-decoration: none;
+  touch-action: manipulation;
+  color: #000;
+}
+
+.header-nav-item {
+  display: inline-block;
+  line-height: 50px;
+  box-sizing: border-box;
+}
+
+.nav-item-title {
+  margin-left: 1rem;
+}
+
+.header-subnav-item .nav-item-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    height: 26px;
+    box-sizing: border-box;
+}
+
+.header-subnav-item .nav-item-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  height: 26px;
+  box-sizing: border-box;
+}
+
+.pizzas-div {
+  margin: 0 auto;
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.pizza-div {
+  margin: 1rem 0.5rem;
+}
+
+.pizza-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #141c24;
+  margin-bottom: 0.5rem;
+}
+
+.pizza-desc {
+  font-size: large;
+  color: #344051;
+}
+
+.pizza-price {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.pizza-button {
+  background-color: #f4511e;
+  color: white;
+  font-size: large;
+  padding: 10px 0px;
+}
