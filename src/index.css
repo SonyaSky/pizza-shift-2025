@@ -3,63 +3,32 @@ body {
   margin: 0;
 }
 
-.with-margin-left {
-  margin-left: 2rem;
-}
+
 
 .brand {
   color: #f4511e;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: bolder;
   margin-top: 0;
+  cursor: default;
 }
 
-
-.pic {
-  padding: 0;
+.basic-text {
+  color: #141c24;
+  font-size: 1.25rem;
 }
 
-.nav-item-link {
-  display: inline-block;
-  text-decoration: none;
-  touch-action: manipulation;
-  color: #000;
-}
-
-.header-nav-item {
-  display: inline-block;
-  line-height: 50px;
-  box-sizing: border-box;
-}
-
-.nav-item-title {
-  margin-left: 1rem;
-}
-
-.header-subnav-item .nav-item-icon {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-    height: 26px;
-    box-sizing: border-box;
-}
-
-.header-subnav-item .nav-item-icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px;
-  height: 26px;
-  box-sizing: border-box;
+.navbar {
+  padding: 2rem 0rem;
 }
 
 .pizzas-div {
   margin: 0 auto;
-  margin-left: 8rem;
-  margin-right: 8rem;
+  margin-left: 15rem;
+  margin-right: 15rem;
 }
 
-.pizza-div {
-  margin: 1rem 0.5rem;
-}
+
 
 .pizza-title {
   font-size: 2rem;
@@ -81,8 +50,17 @@ body {
 }
 
 .pizza-button {
+  padding: 1rem 32px; 
+  border: none;
+  border-radius: 15px;
   background-color: #f4511e;
   color: white;
-  font-size: large;
-  padding: 10px 0px;
+  font-size: 18px;
+  transition: 0.5s;
+  width: 100%;
+  cursor:pointer;
+}
+
+.pizza-button:hover {
+  background-color: #e64a19;
 }

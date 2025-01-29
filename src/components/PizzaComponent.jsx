@@ -1,27 +1,38 @@
 import React from "react";
+import { Card, Image, Text, Button, Group, Grid } from '@mantine/core';
 
+import '../index.css';
+import CustomButton from './CustomButton';
 
 const PizzaComponent = ({imageUrl, title, description, price}) => {
     return (
-        <div className='pizza-div col-3 col-3 d-flex flex-column'>
-          <div className="row">
-            <img src={imageUrl} alt='pizza'></img>
-          </div>
-          <div className="row">
-            <p className='pizza-title'>{title}</p>
-            <div className='pizza-desc'>{description}</div>
-          </div>
-          <footer className="mt-auto">
-            <div className="pizza-price">
-              от {price} ₽
-            </div>
-            <div className="row">
-                <button type='button' className='btn pizza-button'>
-                    Выбрать
-                </button>
-            </div>
-          </footer>
+        <Grid.Col span={4}>
+        <Card padding="md" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+       <Card.Section>
+        <Image
+          src={`https://shift-intensive.ru/api${imageUrl}`}
+          h='auto'
+          alt="pizza"
+          style={{ objectFit: 'cover' }}
+        />
+       </Card.Section>
+
+      <Group>
+        <Text className="pizza-title">{title}</Text>
+      </Group>
+
+      <Text className="pizza-desc" style={{ flexGrow: 1 }}>
+        {description}
+      </Text>
+      <div style={{ marginTop: 'auto' }}> 
+          <Text className="pizza-price">
+            от {price} ₽
+          </Text>
+
+          <CustomButton title="Выбрать"></CustomButton>
         </div>
+    </Card>
+    </Grid.Col>
     )
 }
 
