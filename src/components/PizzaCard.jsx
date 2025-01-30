@@ -1,16 +1,17 @@
 import React from "react";
-import { Card, Image, Text, Button, Group, Grid } from '@mantine/core';
+import { Card, Image, Text, Group, Grid } from '@mantine/core';
 
 import '../index.css';
-import CustomButton from './CustomButton';
+import ModalButton from "./ModalButton";
+import { BASE_URL } from '../helpers/BaseUrl';
 
-const PizzaComponent = ({imageUrl, title, description, price}) => {
-    return (
+const PizzaCard = ({pizza}) => 
+ (
         <Grid.Col span={4}>
         <Card padding="md" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
        <Card.Section>
         <Image
-          src={`https://shift-intensive.ru/api${imageUrl}`}
+          src={`${BASE_URL}${pizza.img}`}
           h='auto'
           alt="pizza"
           style={{ objectFit: 'cover' }}
@@ -18,22 +19,22 @@ const PizzaComponent = ({imageUrl, title, description, price}) => {
        </Card.Section>
 
       <Group>
-        <Text className="pizza-title">{title}</Text>
+        <Text className="pizza-title">{pizza.name}</Text>
       </Group>
 
       <Text className="pizza-desc" style={{ flexGrow: 1 }}>
-        {description}
+        {pizza.description}
       </Text>
       <div style={{ marginTop: 'auto' }}> 
           <Text className="pizza-price">
-            от {price} ₽
+            от {pizza.sizes[0].price} ₽
           </Text>
 
-          <CustomButton title="Выбрать"></CustomButton>
+          <ModalButton title="Выбрать" pizza={pizza}></ModalButton>
         </div>
     </Card>
     </Grid.Col>
     )
-}
 
-export default PizzaComponent;
+
+export default PizzaCard;

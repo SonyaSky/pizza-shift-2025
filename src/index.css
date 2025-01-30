@@ -28,17 +28,46 @@ body {
   margin-right: 15rem;
 }
 
+.pizza-block__selector {
+  display: flex;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  flex-direction: column;
+  padding: 6px;
 
+  ul {
+    display: flex;
+    flex: 1;
+
+    &:first-of-type {
+      margin-bottom: 6px;
+    }
+
+    li {
+      padding: 8px;
+      flex: 1;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      @include noselect();
+      &.active {
+        background: #ffffff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+        border-radius: 5px;
+        cursor: auto;
+      }
+    }
+  }
+}
 
 .pizza-title {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #141c24;
-  margin-bottom: 0.5rem;
 }
 
 .pizza-desc {
-  font-size: large;
+  font-size: 1.1rem;
   color: #344051;
 }
 

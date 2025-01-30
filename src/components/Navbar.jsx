@@ -7,8 +7,8 @@ import UserImage  from '../icons/user.png';
 import TimerImage  from '../icons/timer.png'; 
 import CartImage  from '../icons/shopping-cart.png'; 
 
-const NavbarElement = ({title, image}) => {
-    return (
+const NavbarElement = ({title, image}) => 
+    (
       <Group justify="center">
       <Image
           src={image}
@@ -20,11 +20,11 @@ const NavbarElement = ({title, image}) => {
       </Anchor>
       </Group>
 
-    )
-}
+    );
 
-const Logo = () => {
-    return (
+
+const Logo = () => 
+    (
       <Group align="center"> 
         <div>
           <Text className='brand'>ШИФТ</Text>
@@ -38,10 +38,9 @@ const Logo = () => {
         />
       </Group>
     );
-  };
 
-const Navbar = () => {
-    return (
+const Navbar = () => 
+    (
         <Grid spacing="xl" className='navbar'>
             <Grid.Col span={7}>
                 <Group justify="center" gap={50}>
@@ -57,6 +56,6 @@ const Navbar = () => {
             </Grid.Col>
         </Grid>
     );
-  }
+
 
 export default Navbar;
