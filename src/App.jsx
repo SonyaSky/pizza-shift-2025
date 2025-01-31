@@ -5,16 +5,13 @@ import '@mantine/core/styles.css';
 import Navbar from './components/NavBar';
 import PizzaList from './components/PizzaList';
 
-
-
 export function App() {
   return (
     <MantineProvider>
       <div>
-      <Navbar/> 
-      </div> 
-    <PizzaList/>
-    
+        <Navbar />
+      </div>
+      <PizzaList />
     </MantineProvider>
-  )
+  );
 }

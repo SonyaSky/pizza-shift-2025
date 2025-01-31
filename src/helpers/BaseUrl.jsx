@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://shift-intensive.ru/api'; 
+export const BASE_URL = 'https://shift-intensive.ru/api';

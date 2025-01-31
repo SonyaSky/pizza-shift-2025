@@ -3,8 +3,6 @@ body {
   margin: 0;
 }
 
-
-
 .brand {
   color: #f4511e;
   font-size: 1.1rem;
@@ -30,31 +28,40 @@ body {
 
 .pizza-block__selector {
   display: flex;
-  background-color: #f3f3f3;
-  border-radius: 10px;
   flex-direction: column;
-  padding: 6px;
 
   ul {
     display: flex;
     flex: 1;
-
-    &:first-of-type {
-      margin-bottom: 6px;
-    }
+    background-color: #f3f4f6;
+    border-radius: 15px;
+    border: 1px solid #f3f4f6;
+    list-style-type: none;
+    padding: 1px 1px;
+    margin: 6px 6px;
 
     li {
       padding: 8px;
       flex: 1;
       cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      @include noselect();
+      font-weight: 400;
+      font-size: 15px;
+      text-align: center;
+      background: #f3f4f6;
+      color: #637083;
+      border-radius: 15px;
+      transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        border-radius 0.3s ease,
+        transform 0.3s ease;
       &.active {
         background: #ffffff;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
-        border-radius: 5px;
+        border-radius: 15px;
         cursor: auto;
+        font-weight: 500;
+        color: #141c24;
       }
     }
   }
@@ -79,7 +86,7 @@ body {
 }
 
 .pizza-button {
-  padding: 1rem 32px; 
+  padding: 1rem 32px;
   border: none;
   border-radius: 15px;
   background-color: #f4511e;
@@ -87,7 +94,7 @@ body {
   font-size: 18px;
   transition: 0.5s;
   width: 100%;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .pizza-button:hover {

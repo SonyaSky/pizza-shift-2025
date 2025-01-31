@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Grid } from '@mantine/core';
 
-import PizzaCard from './PizzaCard'; 
+import PizzaCard from './PizzaCard';
 import { fetchPizzas } from '../requests/FetchPizzas';
 
 const PizzaList = () => {
-  const [pizzas, setPizzas] = useState([]); 
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
+  const [pizzas, setPizzas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getPizzas = async () => {
       try {
-        const pizzaData = await fetchPizzas(); 
-        setPizzas(pizzaData); 
+        const pizzaData = await fetchPizzas();
+        setPizzas(pizzaData);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -22,23 +22,20 @@ const PizzaList = () => {
     };
 
     getPizzas();
-  }, []); 
+  }, []);
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>; 
+    return <div>Error: {error}</div>;
   }
 
   return (
     <Grid className='pizzas-div row'>
       {pizzas.map((pizza) => (
-        <PizzaCard 
-          key={pizza.id} 
-          pizza={pizza} 
-        />
+        <PizzaCard key={pizza.id} pizza={pizza} />
       ))}
     </Grid>
   );
