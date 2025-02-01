@@ -18,12 +18,15 @@ const toppingTranslations = {
   FETA: 'Фета'
 };
 
-const normalizeToppings = (topping) => {
+const normalizeToppings = (topping, capitalLetter = true) => {
   return topping.map((topping) => {
     const translatedName = toppingTranslations[topping.name];
+    const finalName = capitalLetter 
+      ? translatedName 
+      : translatedName.charAt(0).toLowerCase() + translatedName.slice(1);
     return {
       ...topping,
-      name: translatedName
+      translatedName: finalName
     };
   });
 };

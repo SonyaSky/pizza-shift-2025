@@ -13,11 +13,15 @@ body {
 
 .basic-text {
   color: #141c24;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 
 .navbar {
-  padding: 2rem 0rem;
+  border-bottom: 1px solid #ced2da;
+}
+
+.pizza-cart {
+  border-bottom: 1px solid #e3e5e5;
 }
 
 .pizzas-div {
@@ -47,21 +51,18 @@ body {
       font-weight: 400;
       font-size: 15px;
       text-align: center;
-      background: #f3f4f6;
-      color: #637083;
+      background: #f3f4f6;  
+      color: #637083; 
       border-radius: 15px;
-      transition:
-        background 0.3s ease,
-        box-shadow 0.3s ease,
-        border-radius 0.3s ease,
-        transform 0.3s ease;
+      transition: background 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease, transform 0.3s ease; 
       &.active {
         background: #ffffff;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
         border-radius: 15px;
         cursor: auto;
-        font-weight: 500;
-        color: #141c24;
+        font-weight: 500; 
+        color: #141c24;; 
+        
       }
     }
   }
@@ -86,7 +87,7 @@ body {
 }
 
 .pizza-button {
-  padding: 1rem 32px;
+  padding: 1rem 32px; 
   border: none;
   border-radius: 15px;
   background-color: #f4511e;
@@ -94,7 +95,7 @@ body {
   font-size: 18px;
   transition: 0.5s;
   width: 100%;
-  cursor: pointer;
+  cursor:pointer;
 }
 
 .pizza-button:hover {

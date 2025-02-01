@@ -10,24 +10,24 @@ import {
   Flex,
   Box,
   Container,
-  MantineThemeProvider
+  MantineThemeProvider,
+  Anchor
 } from '@mantine/core';
 import '@mantine/core/styles.css';
 
-import theme from './theme';
-import ToppingCard from './mainPage/ToppingCard';
-import normalizeToppings from '../helpers/Toppings';
-import handleAddToCart from '../helpers/CartActions';
-import { BASE_URL } from '../helpers/BaseUrl';
-import { useCart } from '../context/CartContext';
-import pizzaTranslation from '../helpers/PizzaTranslation';
+import theme from '../theme';
+import ToppingCard from '../mainPage/ToppingCard';
+import normalizeToppings from '../../helpers/Toppings';
+import pizzaTranslation from '../../helpers/PizzaTranslation';
+import { BASE_URL } from '../../helpers/BaseUrl';
+import { useCart } from '../../context/CartContext';
 
-const ModalButton = ({ title, pizza}) => {
+const ModalAnchor = ({ pizza}) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [activeType, setActiveType] = React.useState('THIN');
-  const [activeSize, setActiveSize] = React.useState('SMALL');
-  const [selectedToppings, setSelectedToppings] = useState([]);
-  const { cartItems, addToCart } = useCart();
+  const [activeType, setActiveType] = React.useState(pizza.dough.name);
+  const [activeSize, setActiveSize] = React.useState(pizza.size.name);
+  const [selectedToppings, setSelectedToppings] = useState(pizza.toppings);
+  const { editCartItem } = useCart();
   const toggleTopping = (topping) => {
     setSelectedToppings((prev) => {
       const isSelected = prev.some((item) => item.name === topping.name);
@@ -38,12 +38,10 @@ const ModalButton = ({ title, pizza}) => {
       }
     });
   };
-  const toppings = normalizeToppings(pizza.toppings);
+  const toppings = normalizeToppings(pizza.pizzaInfo.toppings);
 
-  const onAddToCart = () => {
-    const selectedPizza = handleAddToCart(pizza, activeType, activeSize, selectedToppings, cartItems.length + 1);
-    addToCart(selectedPizza);
-    console.log('Added to cart:', selectedPizza);
+  const onEditCartItem = () => {
+    editCartItem(pizza.cartId, activeSize, activeType, selectedToppings);
     close();
   };
 
@@ -74,7 +72,7 @@ const ModalButton = ({ title, pizza}) => {
 
                   <div className='pizza-block__selector'>
                     <ul>
-                      {pizza.doughs.map((type) => (
+                      {pizza.pizzaInfo.doughs.map((type) => (
                         <li
                           key={type.name}
                           onClick={() => setActiveType(type.name)}
@@ -85,7 +83,7 @@ const ModalButton = ({ title, pizza}) => {
                       ))}
                     </ul>
                     <ul>
-                      {pizza.sizes.map((size) => (
+                      {pizza.pizzaInfo.sizes.map((size) => (
                         <li
                           key={size.name}
                           onClick={() => setActiveSize(size.name)}
@@ -114,17 +112,15 @@ const ModalButton = ({ title, pizza}) => {
             </Box>
             <Container px={0} py={10}>
             <MantineThemeProvider theme={theme}>
-                <Button onClick={onAddToCart}>Добавить в корзину</Button>
+                <Button onClick={onEditCartItem}>Сохранить изменения</Button>
             </MantineThemeProvider>
             </Container>
           </Grid.Col>
         </Grid>
       </Modal>
-      <MantineThemeProvider theme={theme}>
-        <Button onClick={open}>{title}</Button>
-      </MantineThemeProvider>
+      <Anchor underline='always' c='#97A1AF' size='14px' onClick={open}>Изменить</Anchor>
     </>
   );
 };
 
-export default ModalButton;
+export default ModalAnchor;
