@@ -10,23 +10,24 @@ import {
   Flex,
   Box,
   Container,
-  MantineThemeProvider
+  MantineThemeProvider,
+  Anchor
 } from '@mantine/core';
 import '@mantine/core/styles.css';
 
 import theme from '../theme';
 import ToppingCard from '../mainPage/ToppingCard';
 import normalizeToppings from '../../helpers/Toppings';
-import handleAddToCart from '../../helpers/CartActions';
+import pizzaTranslation from '../../helpers/PizzaTranslation';
 import { BASE_URL } from '../../helpers/BaseUrl';
 import { useCart } from '../../context/CartContext';
 
 const ModalAnchor = ({ pizza}) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [activeType, setActiveType] = React.useState('THIN');
-  const [activeSize, setActiveSize] = React.useState('SMALL');
-  const [selectedToppings, setSelectedToppings] = useState([]);
-  const { cartItems, addToCart } = useCart();
+  const [activeType, setActiveType] = React.useState(pizza.dough.name);
+  const [activeSize, setActiveSize] = React.useState(pizza.size.name);
+  const [selectedToppings, setSelectedToppings] = useState(pizza.toppings);
+  const { editCartItem } = useCart();
   const toggleTopping = (topping) => {
     setSelectedToppings((prev) => {
       const isSelected = prev.some((item) => item.name === topping.name);
@@ -37,19 +38,10 @@ const ModalAnchor = ({ pizza}) => {
       }
     });
   };
-  //const toppings = normalizeToppings(pizza.toppings);
-  const pizzaData = {
-    THIN: ['Традиционное', 'традиционное'],
-    THICK: ['Толстое', 'толстое'],
-    SMALL: ['Маленькая', '25 см'],
-    MEDIUM: ['Средняя', '30 см'],
-    LARGE: ['Большая', '35 см']
-  };
+  const toppings = normalizeToppings(pizza.pizzaInfo.toppings);
 
-  const onAddToCart = () => {
-    const selectedPizza = handleAddToCart(pizza, activeType, activeSize, selectedToppings, cartItems.length + 1);
-    addToCart(selectedPizza);
-    console.log('Added to cart:', selectedPizza);
+  const onEditCartItem = () => {
+    editCartItem(pizza.cartId, activeSize, activeType, selectedToppings);
     close();
   };
 
@@ -72,32 +64,32 @@ const ModalAnchor = ({ pizza}) => {
                   <Flex direction='column'>
                     <Text className='pizza-title'>{pizza.name}</Text>
                     <Text c='#637083'>
-                      {activeSize ? `${pizzaData[activeSize][1]}, ` : ''}{' '}
-                      {activeType ? `${pizzaData[activeType][1]} тесто` : 'традиционное тесто'}
+                      {activeSize ? `${pizzaTranslation[activeSize][1]}, ` : ''}{' '}
+                      {activeType ? `${pizzaTranslation[activeType][1]} тесто` : 'традиционное тесто'}
                     </Text>
                   </Flex>
                   <Text className='pizza-desc'>{pizza.description}</Text>
 
                   <div className='pizza-block__selector'>
                     <ul>
-                      {pizza.doughs.map((type) => (
+                      {pizza.pizzaInfo.doughs.map((type) => (
                         <li
                           key={type.name}
                           onClick={() => setActiveType(type.name)}
                           className={activeType === type.name ? 'active' : ''}
                         >
-                          {pizzaData[type.name][0]}
+                          {pizzaTranslation[type.name][0]}
                         </li>
                       ))}
                     </ul>
                     <ul>
-                      {pizza.sizes.map((size) => (
+                      {pizza.pizzaInfo.sizes.map((size) => (
                         <li
                           key={size.name}
                           onClick={() => setActiveSize(size.name)}
                           className={activeSize === size.name ? 'active' : ''}
                         >
-                          {pizzaData[size.name][0]}
+                          {pizzaTranslation[size.name][0]}
                         </li>
                       ))}
                     </ul>
@@ -106,21 +98,21 @@ const ModalAnchor = ({ pizza}) => {
                     Добавить по вкусу
                   </Text>
                   <Grid>
-                  {/* {toppings.map((topping) => (
+                  {toppings.map((topping) => (
                     <ToppingCard
                       key={topping.name}
                       topping={topping}
                       onClick={() => toggleTopping(topping)} 
                       isSelected={selectedToppings.some(item => item.name === topping.name)}
                     />
-                  ))} */}
+                  ))}
                   </Grid>
                 </Flex>
               </ScrollArea>
             </Box>
             <Container px={0} py={10}>
             <MantineThemeProvider theme={theme}>
-                <Button onClick={onAddToCart}>Добавить в корзину</Button>
+                <Button onClick={onEditCartItem}>Сохранить изменения</Button>
             </MantineThemeProvider>
             </Container>
           </Grid.Col>

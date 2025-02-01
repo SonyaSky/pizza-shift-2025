@@ -44,10 +44,31 @@ export const CartProvider = ({ children }) => {
       }
       return cartItem;
     }))
-  }
+  };
+
+  const editCartItem = (cartId, newSize, newDough, newToppings) => {
+    setCartItems((items) => items.map((cartItem) => {
+      if (cartItem.cartId === cartId) {
+        const changedCartItem = {
+          ...cartItem,
+          dough: cartItem.pizzaInfo.doughs.find(dough => dough.name == newDough),
+          size: cartItem.pizzaInfo.sizes.find(size => size.name == newSize),
+          toppings: newToppings.map(({ translatedName, ...rest }) => rest)
+        };
+        return changedCartItem;
+      }
+      return cartItem;
+    }))
+  };
+
+  const getCartTotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + item.fullPrice;
+    }, 0);
+  };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, changeQuantity }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, changeQuantity, editCartItem, getCartTotal }}>
       {children}
     </CartContext.Provider>
   );

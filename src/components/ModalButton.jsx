@@ -20,6 +20,7 @@ import normalizeToppings from '../helpers/Toppings';
 import handleAddToCart from '../helpers/CartActions';
 import { BASE_URL } from '../helpers/BaseUrl';
 import { useCart } from '../context/CartContext';
+import pizzaTranslation from '../helpers/PizzaTranslation';
 
 const ModalButton = ({ title, pizza}) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -38,13 +39,6 @@ const ModalButton = ({ title, pizza}) => {
     });
   };
   const toppings = normalizeToppings(pizza.toppings);
-  const pizzaData = {
-    THIN: ['Традиционное', 'традиционное'],
-    THICK: ['Толстое', 'толстое'],
-    SMALL: ['Маленькая', '25 см'],
-    MEDIUM: ['Средняя', '30 см'],
-    LARGE: ['Большая', '35 см']
-  };
 
   const onAddToCart = () => {
     const selectedPizza = handleAddToCart(pizza, activeType, activeSize, selectedToppings, cartItems.length + 1);
@@ -72,8 +66,8 @@ const ModalButton = ({ title, pizza}) => {
                   <Flex direction='column'>
                     <Text className='pizza-title'>{pizza.name}</Text>
                     <Text c='#637083'>
-                      {activeSize ? `${pizzaData[activeSize][1]}, ` : ''}{' '}
-                      {activeType ? `${pizzaData[activeType][1]} тесто` : 'традиционное тесто'}
+                      {activeSize ? `${pizzaTranslation[activeSize][1]}, ` : ''}{' '}
+                      {activeType ? `${pizzaTranslation[activeType][1]} тесто` : 'традиционное тесто'}
                     </Text>
                   </Flex>
                   <Text className='pizza-desc'>{pizza.description}</Text>
@@ -86,7 +80,7 @@ const ModalButton = ({ title, pizza}) => {
                           onClick={() => setActiveType(type.name)}
                           className={activeType === type.name ? 'active' : ''}
                         >
-                          {pizzaData[type.name][0]}
+                          {pizzaTranslation[type.name][0]}
                         </li>
                       ))}
                     </ul>
@@ -97,7 +91,7 @@ const ModalButton = ({ title, pizza}) => {
                           onClick={() => setActiveSize(size.name)}
                           className={activeSize === size.name ? 'active' : ''}
                         >
-                          {pizzaData[size.name][0]}
+                          {pizzaTranslation[size.name][0]}
                         </li>
                       ))}
                     </ul>

@@ -17,7 +17,11 @@ body {
 }
 
 .navbar {
-  border-bottom: 2px solid #ced2da;
+  border-bottom: 1px solid #ced2da;
+}
+
+.pizza-cart {
+  border-bottom: 1px solid #e3e5e5;
 }
 
 .pizzas-div {

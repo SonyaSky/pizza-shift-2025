@@ -6,16 +6,10 @@ import { BASE_URL } from '../../helpers/BaseUrl';
 import normalizeToppings from '../../helpers/Toppings';
 import { useCart } from '../../context/CartContext';
 import ModalAnchor from './ModalAnchor';
+import pizzaTranslation from '../../helpers/PizzaTranslation';
 
 const CartPizzaCard = ({pizza}) => {
     const { removeFromCart, changeQuantity } = useCart();
-    const pizzaData = {
-        THIN: ['Традиционное', 'традиционное'],
-        THICK: ['Толстое', 'толстое'],
-        SMALL: ['Маленькая', '25 см'],
-        MEDIUM: ['Средняя', '30 см'],
-        LARGE: ['Большая', '35 см']
-      };
     const toppings = normalizeToppings(pizza.toppings, false);
     const [value, { increment, decrement }] = useCounter(pizza.quantity, { min: 0 });
     return (
@@ -30,7 +24,7 @@ const CartPizzaCard = ({pizza}) => {
         </Container>
         <Container w='20rem'>
             <Text c='#141c24' fw={400} size='14px'>
-                {`${pizzaData[pizza.size.name][0]} ${pizzaData[pizza.size.name][1]}, ${pizzaData[pizza.dough.name][1]} тесто`}
+                {`${pizzaTranslation[pizza.size.name][0]} ${pizzaTranslation[pizza.size.name][1]}, ${pizzaTranslation[pizza.dough.name][1]} тесто`}
             </Text>
             {toppings.length > 0 && (
                 <Text c='#141c24' fw={400} size='14px'>
@@ -53,7 +47,7 @@ const CartPizzaCard = ({pizza}) => {
         </Button.Group>
         </Container>
         <Container >
-        <Anchor underline='always' c='#97A1AF' size='14px'>Изменить</Anchor>
+        <ModalAnchor pizza={pizza} />
         </Container>
         <Container >
             <Text fw={500} size='16px'>

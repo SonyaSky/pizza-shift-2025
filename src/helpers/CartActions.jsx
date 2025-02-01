@@ -2,6 +2,7 @@ export const handleAddToCart = (pizza, activeType, activeSize, toppings, cartId)
     const selectedPizza = {
       id: pizza.id,
       cartId: cartId,
+      description: pizza.description,
       name: pizza.name,
       img: pizza.img,
       quantity: 1,
@@ -13,6 +14,12 @@ export const handleAddToCart = (pizza, activeType, activeSize, toppings, cartId)
     const fullPrice = selectedPizza.size.price  + selectedPizza.dough.price + toppingCost;
     selectedPizza.pizzaPrice = fullPrice;
     selectedPizza.fullPrice = fullPrice;
+    const pizzaInfo = {
+      doughs: pizza.doughs,
+      sizes: pizza.sizes,
+      toppings: pizza.toppings
+    };
+    selectedPizza.pizzaInfo = pizzaInfo;
     return selectedPizza;
   };
 
