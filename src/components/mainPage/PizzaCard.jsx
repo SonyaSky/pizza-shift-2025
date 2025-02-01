@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Image, Text, Group, Grid } from '@mantine/core';
 
-import '../index.css';
-import ModalButton from './ModalButton';
-import { BASE_URL } from '../helpers/BaseUrl';
+import '../../index.css';
+import ModalButton from '../ModalButton';
+import { BASE_URL } from '../../helpers/BaseUrl';
 
 const PizzaCard = ({ pizza }) => (
   <Grid.Col span={4}>

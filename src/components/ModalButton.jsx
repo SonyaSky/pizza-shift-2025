@@ -4,25 +4,37 @@ import {
   Modal,
   Text,
   Image,
-  Group,
+  Button,
   Grid,
   ScrollArea,
   Flex,
-  Button,
-  rem,
-  Container
+  Box,
+  Container,
+  MantineThemeProvider
 } from '@mantine/core';
 import '@mantine/core/styles.css';
 
-import CustomButton from './CustomButton';
-import ToppingCard from './ToppingCard';
+import theme from './theme';
+import ToppingCard from './mainPage/ToppingCard';
 import normalizeToppings from '../helpers/Toppings';
+import handleAddToCart from '../helpers/CartActions';
 import { BASE_URL } from '../helpers/BaseUrl';
 
-const ModalButton = ({ title, pizza }) => {
+const ModalButton = ({ title, pizza}) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [activeType, setActiveType] = React.useState('THIN');
   const [activeSize, setActiveSize] = React.useState('SMALL');
+  const [selectedToppings, setSelectedToppings] = useState([]);
+  const toggleTopping = (topping) => {
+    setSelectedToppings((prev) => {
+      const isSelected = prev.some((item) => item.name === topping.name);
+      if (isSelected) {
+        return prev.filter((item) => item.name !== topping.name); 
+      } else {
+        return [...prev, topping]; 
+      }
+    });
+  };
   const toppings = normalizeToppings(pizza.toppings);
   const pizzaData = {
     THIN: ['Традиционное', 'традиционное'],
@@ -31,6 +43,13 @@ const ModalButton = ({ title, pizza }) => {
     MEDIUM: ['Средняя', '30 см'],
     LARGE: ['Большая', '35 см']
   };
+
+  const onAddToCart = () => {
+    console.log(selectedToppings);
+    const selectedPizza = handleAddToCart(pizza, activeType, activeSize, selectedToppings);
+    console.log('Added to cart:', selectedPizza);
+  };
+
   return (
     <>
       <Modal opened={opened} onClose={close} centered size='60rem' radius={20}>
@@ -39,9 +58,9 @@ const ModalButton = ({ title, pizza }) => {
             <Image src={`${BASE_URL}${pizza.img}`} alt={pizza.name} h='300' w='auto' />
           </Grid.Col>
           <Grid.Col span={7}>
-            <div style={{ height: '65vh' }}>
+            <Box h='65vh'>
               <ScrollArea
-                style={{ height: '100%' }}
+                h='100%'
                 type='scroll'
                 offsetScrollbars
                 scrollbarSize={6}
@@ -84,20 +103,29 @@ const ModalButton = ({ title, pizza }) => {
                     Добавить по вкусу
                   </Text>
                   <Grid>
-                    {toppings.map((topping) => (
-                      <ToppingCard key={topping.name} topping={topping} />
-                    ))}
+                  {toppings.map((topping) => (
+                    <ToppingCard
+                      key={topping.name}
+                      topping={topping}
+                      onClick={() => toggleTopping(topping)} 
+                      isSelected={selectedToppings.some(item => item.name === topping.name)}
+                    />
+                  ))}
                   </Grid>
                 </Flex>
               </ScrollArea>
-            </div>
+            </Box>
             <Container px={0} py={10}>
-              <CustomButton title='Добавить в корзину' />
+            <MantineThemeProvider theme={theme}>
+                <Button onClick={onAddToCart}>Добавить в корзину</Button>
+            </MantineThemeProvider>
             </Container>
           </Grid.Col>
         </Grid>
       </Modal>
-      <CustomButton variant='default' title={title} onClick={open}></CustomButton>
+      <MantineThemeProvider theme={theme}>
+        <Button onClick={open}>{title}</Button>
+      </MantineThemeProvider>
     </>
   );
 };
