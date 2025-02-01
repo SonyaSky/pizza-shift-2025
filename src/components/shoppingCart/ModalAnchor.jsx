@@ -14,14 +14,14 @@ import {
 } from '@mantine/core';
 import '@mantine/core/styles.css';
 
-import theme from './theme';
-import ToppingCard from './mainPage/ToppingCard';
-import normalizeToppings from '../helpers/Toppings';
-import handleAddToCart from '../helpers/CartActions';
-import { BASE_URL } from '../helpers/BaseUrl';
-import { useCart } from '../context/CartContext';
+import theme from '../theme';
+import ToppingCard from '../mainPage/ToppingCard';
+import normalizeToppings from '../../helpers/Toppings';
+import handleAddToCart from '../../helpers/CartActions';
+import { BASE_URL } from '../../helpers/BaseUrl';
+import { useCart } from '../../context/CartContext';
 
-const ModalButton = ({ title, pizza}) => {
+const ModalAnchor = ({ pizza}) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [activeType, setActiveType] = React.useState('THIN');
   const [activeSize, setActiveSize] = React.useState('SMALL');
@@ -37,7 +37,7 @@ const ModalButton = ({ title, pizza}) => {
       }
     });
   };
-  const toppings = normalizeToppings(pizza.toppings);
+  //const toppings = normalizeToppings(pizza.toppings);
   const pizzaData = {
     THIN: ['Традиционное', 'традиционное'],
     THICK: ['Толстое', 'толстое'],
@@ -106,14 +106,14 @@ const ModalButton = ({ title, pizza}) => {
                     Добавить по вкусу
                   </Text>
                   <Grid>
-                  {toppings.map((topping) => (
+                  {/* {toppings.map((topping) => (
                     <ToppingCard
                       key={topping.name}
                       topping={topping}
                       onClick={() => toggleTopping(topping)} 
                       isSelected={selectedToppings.some(item => item.name === topping.name)}
                     />
-                  ))}
+                  ))} */}
                   </Grid>
                 </Flex>
               </ScrollArea>
@@ -126,11 +126,9 @@ const ModalButton = ({ title, pizza}) => {
           </Grid.Col>
         </Grid>
       </Modal>
-      <MantineThemeProvider theme={theme}>
-        <Button onClick={open}>{title}</Button>
-      </MantineThemeProvider>
+      <Anchor underline='always' c='#97A1AF' size='14px' onClick={open}>Изменить</Anchor>
     </>
   );
 };
 
-export default ModalButton;
+export default ModalAnchor;
