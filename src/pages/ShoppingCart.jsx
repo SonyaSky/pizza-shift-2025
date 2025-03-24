@@ -14,6 +14,10 @@ const ShoppingCart = () => {
     const handleButtonClick = () => {
         navigate('/'); 
     };
+
+    const ToCustomerInfo = () => {
+        navigate('/CustomerInfo'); 
+    };
   return (
     <>
         <Container size="lg" pt='2rem'>
@@ -49,7 +53,7 @@ const ShoppingCart = () => {
                 </Grid.Col>
                 <Grid.Col span={4} offset={3}>
                     <MantineThemeProvider theme={theme}>
-                        <Button radius='lg'>Оформить заказ</Button>
+                        <Button radius='lg' onClick={ToCustomerInfo}>Оформить заказ</Button>
                     </MantineThemeProvider>
                 </Grid.Col>
             </Grid>

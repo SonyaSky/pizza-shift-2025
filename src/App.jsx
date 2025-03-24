@@ -6,6 +6,7 @@ import '@mantine/core/styles.css';
 import Navbar from './components/NavBar';
 import PizzaList from './components/mainPage/PizzaList';
 import ShoppingCart from './pages/ShoppingCart';
+import CustomerData from './pages/CustomerForm';
 import { CartProvider } from './context/CartContext';
 import './index.css';
 
@@ -18,6 +19,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<PizzaList />} /> 
           <Route path="/ShoppingCart" element={<ShoppingCart />} /> 
+          <Route path="/CustomerInfo" element={<CustomerData />} />
         </Routes>
       </div>
       </CartProvider>
